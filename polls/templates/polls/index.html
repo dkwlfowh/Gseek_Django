@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>경기도청 Gseek State</title>
+</head>
+<body>
+
+<center>
+    <h1>"경기도청 Gseek State(경기도청 모니터링 서버)"</h1>
+<form action="{% url 'polls:news' %}"  method="GET">
+        <h3><label>날짜를 입력하세요.</label></h3>
+        <p><label>Start_Date  </label><input type="datetime-local" name="starttime" >
+        <label>End_Date  </label><input type="datetime-local" name="endtime" >
+        <input type="submit" value="입력"></p>
+</form>
+ <label>STARTIME: </label> {{starttime}}
+ <label>ENDTIME: </label> {{endtime}}
+ <table class="table table-striped">
+        <thead>
+        <tr>
+            <td><B> SQL TEXT </B></td>
+            <td><B> CNT </B></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for state in latest_state %}
+        <tr>
+          <td>{{ state.state }}</td>
+          <td>{{ state.cnt_state }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+ </table>
+
+</center>
+
+</body>
+</html>

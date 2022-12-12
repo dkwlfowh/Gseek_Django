@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>경기도청 지식 사이트 모니터링 서버</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="static/css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+
+
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="">모니터링</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">SQLTEXT 모니터링</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">실행 SQL Text 모니터링</li>
+                        </ol>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">경기도청</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="http://101.101.169.218/zabbix/zabbix.php?action=dashboard.view">Zabbix</a>
+                                        <a class="small text-white stretched-link" href="http://101.101.169.218:8080/graph/d/Gh9QpRQ7k12/mysql-moniteoring-copy2?orgId=1">PMM</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">코베아</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="http://101.101.169.218/zabbix/zabbix.php?action=dashboard.view">Zabbix</a>
+                                        <a class="small text-white stretched-link" href="http://101.101.169.218:8080/graph/d/Gh9QpRQ7k12/mysql-moniteoring-copy2?orgId=1">PMM</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">경희대</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="http://101.101.169.218/zabbix/zabbix.php?action=dashboard.view">Zabbix</a>
+                                        <a class="small text-white stretched-link" href="http://101.101.169.218:8080/graph/d/Gh9QpRQ7k12/mysql-moniteoring-copy2?orgId=1">PMM</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">케리스 지식셈터</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="http://101.101.169.218/zabbix/zabbix.php?action=dashboard.view">Zabbix</a>
+                                        <a class="small text-white stretched-link" href="http://101.101.169.218:8080/graph/d/Gh9QpRQ7k12/mysql-moniteoring-copy2?orgId=1">PMM</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                <h3>날짜 설정.</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <form action="{% url 'polls:news' %}"  method="GET">
+                                  <p><input type="datetime-local" name="starttime" id="lastday">
+                                  <b>~</b>
+                                  <input type="datetime-local" name="endtime" id="now">
+                                  <input type="submit" value="적용"></p>
+                                  <b>시작 : {{ starttime }}  끝: {{ endtime }}</b>
+                                </form>
+                                     <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <td><B> SQL TEXT </B></td>
+                                                <td><B> CNT </B></td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for state in latest_state %}
+                                            <tr>
+                                              <td><a href="#" data-toggle="modal" data-target="#myModal">{{ state.state }}</a></td>
+                                              <td>{{ state.cnt_state }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                     </table>
+
+                                <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                                      <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                          <h4 class="modal-title">Query Detail</h4>
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            {% for state in latest_state %}
+                                            <label>{{ state.state }}</label>
+                                            {% endfor %}
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+
+                                      </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+        <script>
+            window.addEventListener("load", function() {
+                var now = new Date();
+                var offset = now.getTimezoneOffset() * 60000;
+                var adjustedDate = new Date(now.getTime()- offset);
+                var formattedDate = adjustedDate.toISOString().substring(0,16); // For minute precision
+                var datetimeField = document.getElementById("now");
+                datetimeField.value = formattedDate;
+            });
+        </script>
+        <script>
+            window.addEventListener("load", function() {
+                var now = new Date();
+                var offset = now.getTimezoneOffset() * 60000;
+                var yesterday = new Date(now.setDate(now.getDate() - 1));
+                var adjustedDate = new Date(yesterday.getTime()- offset);
+                var formattedDate = adjustedDate.toISOString().substring(0,16); // For minute precision
+                var datetimeField = document.getElementById("lastday");
+                datetimeField.value = formattedDate;
+            });
+        </script>
+    </body>
+</html>
